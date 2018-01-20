@@ -22,4 +22,5 @@ const params = {
 };
 
 Project.scope({method: ["sortable", params]).findAll();
+// => SELECT "id", "name" FROM "users" AS "user" ORDER BY "user"."id" ASC, "user"."name" DESC;
 ```
