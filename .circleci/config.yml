@@ -6,7 +6,8 @@ jobs:
       - image: circleci/node:7.10
       - image: postgres:9.6
         environment:
-          - POSTGRES_USER=postgres
+          - POSTGRES_USER=tester
+          - POSTGRES_DB=ci_test
     working_directory: ~/app
 
     steps:
@@ -22,10 +23,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package-lock.json" }}
       - run:
-          name: Create database & user.
-          command: sudo -u postgres psql -p 5432 -f ./database/bootstrap.sql
-      - run:
           name: lint & test
           command: npm run ci
           environment:
-            TEST_DB: "postgres://test_user:test@localhost:5432/ci_test"
+            TEST_DB: "postgres://tester@localhost:5432/ci_test"
