@@ -1,0 +1,31 @@
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:7.10
+      - image: postgres:9.6
+        environment:
+          - POSTGRES_USER=postgres
+    working_directory: ~/app
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install dependencies
+          command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
+      - run:
+          name: Create database & user.
+          command: sudo -u postgres psql -p 5432 -f ./database/bootstrap.sql
+      - run:
+          name: lint & test
+          command: npm run ci
+          environment:
+            TEST_DB: "postgres://test_user:test@localhost:5432/ci_test"
