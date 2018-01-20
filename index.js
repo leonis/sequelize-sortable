@@ -82,15 +82,24 @@ const selectSortableKeys = (cls, acceptableKeys) => {
     });
   }
 
-  return cls.sortableKeys;
+  return attrs;
 };
 
 const Sorter = {
+  /**
+   * Extend the class as "Sortable"
+   *
+   * @param {Sequelize.Model} cls - subclass of Sequelize model.
+   * @param {object} options - options
+   * @param {Array<string>} options.sortableKeys - default sortable keys.
+   * @return {Sequelize.Model} Extended subclass of Sequelize Model.
+   */
   sortable: (cls, options) => {
     /**
      * Sortable keys (whilte list)
      */
-    cls.sortableKeys = Object.keys(cls.attributes);
+    const defaultKeys = (options ? options.sortableKeys : undefined);
+    cls.sortableKeys = selectSortableKeys(cls, defaultKeys);
 
     /**
      * sortable Scope
