@@ -29,7 +29,21 @@ describe('Sorter', () => {
   });
 
   describe('sortable scope', () => {
-    describe('with undefined', () => {
+    describe('without sort key', () => {
+      it('should not throw error.', () => {
+        co(function * () {
+          const userIds = yield User.scope({method: ['sortable', undefined]})
+            .findAll()
+            .then((users) => {
+              return users.map((user) => user.get('id'));
+            });
+
+          expect(userIds).to.eql(makeIds(1, 100));
+        });
+      });
+    });
+
+    describe('with undefined value', () => {
       it('should not throw error.', () => {
         co(function * () {
           const params = {sort: undefined};
