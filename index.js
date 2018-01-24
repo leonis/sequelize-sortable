@@ -126,7 +126,7 @@ const Sorter = {
      * @param {Array<string>|undefined} acceptableKeys - Acceptable sort keys. (accept all attrs in this Model if undefined.)
      */
     cls.addScope('sortable', function(params, acceptableKeys) {
-      if (!params.sort || params.sort.length === 0) {
+      if (!params || !params.sort || params.sort.length === 0) {
         return {};
       }
 
