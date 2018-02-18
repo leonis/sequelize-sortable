@@ -17,8 +17,7 @@
     "sort"
   ],
   "author": "dev@irow.io",
-  "license": "UNLICENSED",
-  "private": true,
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/leonis/sequelize-sortable/issues"
   },
