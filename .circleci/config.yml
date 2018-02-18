@@ -1,19 +1,18 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/app
     docker:
-      # specify the version you desire here
       - image: circleci/node:4.8.7
       - image: postgres:10
         environment:
-          - POSTGRES_USER=root
-          - POSTGRES_DB=testdb
-    working_directory: ~/app
+          POSTGRES_USER: root
+          POSTGRES_DB: testdb
     steps:
       - checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ arch }}-{{ checksum "package-lock.json" }}
+          - dependencies-{{ arch }}-{{ checksum "package-lock.json" }}
       - run:
           name: Install dependencies
           command: npm install
@@ -23,7 +22,7 @@ jobs:
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
       - save_cache:
-          key: v1-dependencies-{{ arch }}-{{ checksum "package-lock.json" }}
+          key: dependencies-{{ arch }}-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
             - ./cc-test-reporter
@@ -33,10 +32,15 @@ jobs:
             sleep 5
             dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
-          name: lint & test
-          command: npm run ci
+          name: lint and test
+          command: |
+            npm run lint
+            ./cc-test-reporter before-build
+            npm run test
+            ./cc-test-reporter after-build --exit-code $?
           environment:
             TEST_DB: postgres://root:@127.0.0.1:5432/testdb
+            CC_TEST_REPORTER_ID: 9b0c3018c65945ad83280063de49b28a00e03ac7e4cf1b3422cf0168b3361d8b
 
 workflows:
   version: 2
