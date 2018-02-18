@@ -37,3 +37,9 @@ jobs:
           command: npm run ci
           environment:
             TEST_DB: postgres://root:@127.0.0.1:5432/testdb
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
