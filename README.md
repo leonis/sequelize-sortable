@@ -1,5 +1,9 @@
 # sequelize-sortable
 
+[![CircleCI](https://circleci.com/gh/leonis/sequelize-sortable.svg?style=shield&circle-token=d135493bbd37dff56fb5c76141311158427bb580)](https://circleci.com/gh/leonis/sequelize-sortable)
+[![Maintainability](https://api.codeclimate.com/v1/badges/dc7d1314d97f43eb4d78/maintainability)](https://codeclimate.com/github/leonis/sequelize-sortable/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/dc7d1314d97f43eb4d78/test_coverage)](https://codeclimate.com/github/leonis/sequelize-sortable/test_coverage)
+
 `sequelize-sortable` is a Sequelize plugin to support simple sort query using scope.
 
 # Usage
