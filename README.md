@@ -26,10 +26,10 @@ const Project = sequelize.define('project', {
   }
 });
 
-// CASE: Accept all of attributes as sort key.
+// CASE: Use just sortable method if accept all of attributes as sort key.
 Sorter.sortable(Project);
 
-// CASE: Accept part of attributes as sort key.
+// CASE: Use sortable method with options which has sortableKeys property if accept part of attributes as sort key.
 // (ex: only "id", other keys are ignored.)
 Sorter.sortable(Project, {sortableKeys: ["id"]})
 ```
