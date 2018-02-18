@@ -1,6 +1,6 @@
 {
   "name": "sequelize-sortable",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "sequelize plugin to support sort query using scope.",
   "main": "index.js",
   "scripts": {
