@@ -46,7 +46,7 @@ Project.scope({method: ["sortable", params]).findAll();
 ```
 
 The value of the `sort` property is a comma separated string.
-Each components of the comma separated string are `the model's properties` which may decorated with `+`/`-`.
+Each component of the comma separated string are `the model's properties` which may decorat with `+`/`-`.
 
 # HowToDevelop
 
